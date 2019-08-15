@@ -1,4 +1,6 @@
-#!/bin/bash
+#! env bash
+set -ex
+
 #set directory permissions
 cd $path_cwd
 dir_name=lambda_pkg_$random_string/
@@ -17,14 +19,18 @@ if [ -f $FILE ]; then
 else
   echo "requirement.txt file does not exist. Skipping installation of dependencies."
 fi
+
 #deactivate virtualenv
 deactivate
+
 #creating deployment package
 cd env-$function_name/lib/$runtime/site-packages/
 cp -r . $path_cwd/$dir_name
 cp -r $source_code_path/ $path_cwd/$dir_name
+
 #removing virtual env folder
 rm -rf $path_module/env-$function_name/
+
 #add lambda_pkg directory to .gitignore
 GIT_FILE=$path_cwd/.gitignore
 if [ -f $GIT_FILE ]; then
