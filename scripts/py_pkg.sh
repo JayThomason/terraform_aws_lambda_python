@@ -6,7 +6,7 @@ mkdir $dir_name
 
 #virtual env setup
 cd $path_module
-virtualenv -p $runtime env-$function_name
+python3 -m venv -p $runtime env-$function_name
 source env-$function_name/bin/activate
 
 #installing python dependencies
